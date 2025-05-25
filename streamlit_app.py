@@ -70,8 +70,8 @@ feats = compute_features()
 tab = st.sidebar.radio(
     "Vælg sektion:",
     [
-        "Data Cleaning", "Exploratory Analysis", "Decision Tree",
-        "Random Forest", "KNN Regressor", "Linear Regression",
+        "Data Cleaning", "Exploratory Analysis", "Linear Regression", "Decision Tree",
+        "Random Forest", "KNN Regressor", 
         "Denmark 2019 Prediction", "Clustering"
     ]
 )
