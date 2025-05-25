@@ -30,31 +30,32 @@ st.set_page_config(
 # ---------------------------------------------------
 @st.cache_data
 def load_data():
-    df = pd.read_csv("data/master.csv")
+    df = pd.read_csv("./cleaned_suicide_data.csv")
+    #df = pd.read_csv("data/master.csv")
     # Konverter gdp_for_year til numerisk
-    df['gdp_for_year'] = (
-        df[' gdp_for_year ($) ']
-            .str.replace(r'[^\d]', '', regex=True)
-            .astype(float)
-    )
-    # Drop ubrugte kolonner
-    df = df.drop(columns=[
-        'HDI for year',
-        ' gdp_for_year ($) ',
-        'country-year',
-        'generation'
-    ])
-    # Kategoriser aldersgrupper
-    df['age'] = pd.Categorical(df['age'], categories=age_order, ordered=True)
-    df['age_encoded'] = df['age'].cat.codes
-    # Numerisk køn
-    df['sex_numeric'] = df['sex'].map({'male': 1, 'female': 2})
-    # Numerisk land
-    countries = sorted(df['country'].unique())
-    country_map = {c: i+1 for i, c in enumerate(countries)}
-    df['country_numeric'] = df['country'].map(country_map)
-    # Fjern år 2016
-    df = df[df['year'] != 2016]
+    # df['gdp_for_year'] = (
+    #     df[' gdp_for_year ($) ']
+    #         .str.replace(r'[^\d]', '', regex=True)
+    #         .astype(float)
+    # )
+    # # Drop ubrugte kolonner
+    # df = df.drop(columns=[
+    #     'HDI for year',
+    #     ' gdp_for_year ($) ',
+    #     'country-year',
+    #     'generation'
+    # ])
+    # # Kategoriser aldersgrupper
+    # df['age'] = pd.Categorical(df['age'], categories=age_order, ordered=True)
+    # df['age_encoded'] = df['age'].cat.codes
+    # # Numerisk køn
+    # df['sex_numeric'] = df['sex'].map({'male': 1, 'female': 2})
+    # # Numerisk land
+    # countries = sorted(df['country'].unique())
+    # country_map = {c: i+1 for i, c in enumerate(countries)}
+    # df['country_numeric'] = df['country'].map(country_map)
+    # # Fjern år 2016
+    # df = df[df['year'] != 2016]
     return df
 
 # Indlæs data
