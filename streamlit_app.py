@@ -22,6 +22,19 @@ from decision_tree import (
 )
 from knn_regressor import train_knn_regressor
 from linear_regression import train_linear_regression, plot_regression_line
+from clustering import (
+    load_and_scale_data,
+    compute_distortions,
+    plot_elbow,
+    compute_silhouette_scores,
+    plot_silhouette,
+    train_kmeans,
+    assign_clusters,
+    compute_pca_projection,
+    plot_pca_clusters,
+    plot_decision_boundaries,
+    silhouette_visualization
+)
 
 # ---- Page config ----
 st.set_page_config(page_title="Suicide Analysis & Modeling", layout="wide")
@@ -56,9 +69,11 @@ feats = compute_features()
 # ---- Sidebar ----
 tab = st.sidebar.radio(
     "Vælg sektion:",
-    ["Data Cleaning", "Exploratory Analysis", "Decision Tree",
-     "Random Forest", "KNN Regressor", "Linear Regression",
-     "Denmark 2019 Prediction"]
+    [
+        "Data Cleaning", "Exploratory Analysis", "Decision Tree",
+        "Random Forest", "KNN Regressor", "Linear Regression",
+        "Denmark 2019 Prediction", "Clustering"
+    ]
 )
 
 # ---- Sections ----
@@ -394,3 +409,72 @@ elif tab == "Denmark 2019 Prediction":
     st.dataframe(pred)
     st.subheader(f"Total forventede selvmord: {pred['expected_suicides'].sum():.0f}")
 
+
+elif tab == "Clustering":
+    st.header("8. KMeans Clustering Analysis")
+    st.write("I dette afsnit undersøger vi, om der findes naturlige grupper (clusters) i vores datasæt ved hjælp af KMeans.")
+    st.write("Clustering er en process der kan tage længere tid så venligst giv siden 30 sek til at loade færdig.")
+
+    # 1. Load & scale data
+    st.subheader("1. Load & Scale Data")
+    st.write("Vi indlæser det rensede datasæt uden års- og landekode og standardiserer alle numeriske variable.")
+    df_full, X_scaled = load_and_scale_data(
+        "cleaned_suicide_data.csv",
+        drop_cols=['year', 'country_numeric']
+    )
+    st.write(f"• Antal observationer: **{df_full.shape[0]}** • Antal features skaleret: **{X_scaled.shape[1]}**")
+
+    # 2. Elbow method
+    st.subheader("2. Elbow Method (Distortion)")
+    st.write("Vi beregner “distortion” (gennemsnitlig mindsteafstand til centroid) for k=2…10.")
+    ks = range(2, 11)
+    distortions = compute_distortions(X_scaled, ks)
+    fig_elbow = plot_elbow(ks, distortions)
+    fig_elbow.set_size_inches(6,4)
+    st.pyplot(fig_elbow)
+    st.write("Elbow-kurven viser, om der er et punkt, hvor yderligere clusters giver minimal gevinst.")
+
+    # 3. Silhouette method
+    st.subheader("3. Silhouette Scores")
+    st.write("Silhouette-score måler, hvor godt punkter er placeret i deres cluster i forhold til naboclusters.")
+    sil_scores = compute_silhouette_scores(X_scaled, range(2, 10))
+    fig_sil = plot_silhouette(range(2,10), sil_scores)
+    fig_sil.set_size_inches(6,4)
+    st.pyplot(fig_sil)
+    st.write("En høj score (~1) indikerer klare og adskilte clusters; en score nær 0 indikerer overlap.")
+    
+
+    # 4. Train final KMeans
+    st.subheader("4. Train Final KMeans")
+    st.write("Vi vælger k baseret på foregående analyser og træner en endelig KMeans-model.")
+    k_opt = st.sidebar.slider("Vælg k for endelig model", 2, 10, 2)
+    model = train_kmeans(X_scaled, k_opt)
+    df_clusters = assign_clusters(df_full, model)
+    st.write("Antal medlemmer i hver cluster:")
+    st.dataframe(
+        df_clusters['cluster']
+            .value_counts()
+            .rename_axis('cluster')
+            .reset_index(name='count')
+    )
+
+    # 5. PCA projection & cluster plots
+    st.subheader("5. PCA Projection of Clusters")
+    st.write("Vi reducerer dimensionerne til to PCA-komponenter for at visualisere cluster-fordelingen.")
+    proj, pca = compute_pca_projection(X_scaled)
+    fig_pca = plot_pca_clusters(proj, model.labels_)
+    fig_pca.set_size_inches(6,4)
+    st.pyplot(fig_pca)
+
+    st.subheader("6. Decision Boundaries in PCA Space")
+    st.write("Her ses, hvilke regioner i PCA-rummet der tilhører hvilken cluster.")
+    fig_bound = plot_decision_boundaries(proj, model, pca)
+    fig_bound.set_size_inches(6,4)
+    st.pyplot(fig_bound)
+
+    # 6. Silhouette visualizer
+    st.subheader("7. Silhouette Plot")
+    st.write("Det manuelle silhuet-plot viser fordelingen af silhouette-værdier pr. cluster.")
+    fig_vis = silhouette_visualization(X_scaled, model)
+    fig_vis.set_size_inches(6,4)
+    st.pyplot(fig_vis)
