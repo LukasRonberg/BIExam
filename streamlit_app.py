@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # ---- Import functions ----
-from cleaning_and_exploration import (
+from py_converted_scripts.cleaning_and_exploration import (
     load_data, drop_hdi, convert_gdp_for_year, drop_unused_columns,
     encode_age, encode_sex, map_country_numeric, remove_year,
     remove_outliers, calculate_yearly_suicides, plot_yearly_suicides,
@@ -14,15 +14,15 @@ from cleaning_and_exploration import (
     summarize_age_totals, plot_bar_age_totals,
     summarize_sex_totals, plot_bar_sex_totals
 )
-from decision_tree import (
+from py_converted_scripts.decision_tree import (
     train_decision_tree, plot_decision_tree_model,
     get_feature_importance, plot_feature_importance,
     plot_actual_vs_predicted, train_random_forest,
     predict_suicides_for_population
 )
-from knn_regressor import train_knn_regressor
-from linear_regression import train_linear_regression, plot_regression_line
-from clustering import (
+from py_converted_scripts.knn_regressor import train_knn_regressor
+from py_converted_scripts.linear_regression import train_linear_regression, plot_regression_line
+from py_converted_scripts.clustering import (
     load_and_scale_data,
     compute_distortions,
     plot_elbow,
