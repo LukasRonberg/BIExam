@@ -1,10 +1,22 @@
 # BIExam
 
-# Suicide Rate Insights & Prevention Dashboard
+# Suicide Rate Insights & Dashboard:
 
-## 1. Problem Statement
+## 1. Projetk:
 
-Selvmordsrater varierer betydeligt mellem lande, aldersgrupper og køn, men der mangler en samlet, interaktiv BI-løsning, der kan belyse underliggende tendenser og risikofaktorer over tid. Dette projekt leverer et web-dashboard, der kombinerer EDA, interaktive kort, grafer og ML-forudsigelser, så beslutningstagere kan identificere højrisikogrupper og målrette forebyggende initiativer.
+Vi har valgt at arbejde med datasættet "Suicide Rates Overview 1985 to 2016"1, som er tilgængeligt
+på Kaggle. Datasættet indeholder information om selvmordsrater fra 1985 til 2016, fordelt på
+forskellige lande, aldersgrupper, køn og socioøkonomiske faktorer som BNP per indbygger.
+
+I opgaven renser vi datasættet for manglende eller irrelevante værdier og forbereder det til analyse.
+Derefter anvender vi forskellige statistiske og visuelle modeller til at identificere mønstre og
+undersøge potentielle sammenhænge mellem demografiske faktorer og udviklingen i selvmordsrater
+over tid.
+
+Opgaven er udarbejdet af Lars Dige Grønberg, Lukas Ginnerskov Rønberg, Mike Patrick Nørlev
+Andersen og Nicolai Christian Dahl Pejtersen.
+
+Streamlit leverer et web-dashboard, der kombinerer EDA, interaktive kort, grafer og ML-forudsigelser, så beslutningstagere kan identificere højrisikogrupper.
 
 ## 2. Motivation
 
@@ -90,12 +102,4 @@ Selvmordsrater varierer betydeligt mellem lande, aldersgrupper og køn, men der 
    ```bash
    streamlit run app.py
    ```
-4. **Brug**
-
-   * Vælg filtre i sidebar
-   * Naviger mellem “Dashboard”, “Kort” og “Forudsigelse”
-   * Åbn `notebooks/eda_model.ipynb` for detaljeret EDA og model-kode
-
 ---
-
-*Kontakt: [tdi@cphbusiness.dk](mailto:tdi@cphbusiness.dk)*
