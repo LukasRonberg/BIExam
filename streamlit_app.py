@@ -70,11 +70,100 @@ feats = compute_features()
 tab = st.sidebar.radio(
     "Vælg sektion:",
     [
-        "Data Cleaning", "Exploratory Analysis", "Linear Regression", "Decision Tree",
+        "Introduktion","Data Cleaning", "Exploratory Analysis", "Linear Regression", "Decision Tree",
         "Random Forest", "KNN Regressor", 
-        "Denmark 2019 Prediction", "Clustering"
+        "Denmark 2019 Prediction", "Clustering", "Konklusion"
     ]
 )
+# ---- Introduction ----
+if tab == "Introduktion":
+    st.title("Introduktion")
+    st.markdown(
+        """
+        Dette projekt analyserer **selvmordsdata** fra Verdenssundhedsorganisationen (WHO) for at afdække mønstre og tendenser i selvmordsrater globalt.
+
+        Vi vil:
+        - Udforske og rense datasættet **Suicide Rates Overview 1985–2016** (Kaggle)
+        - Anvende **Exploratory Data Analysis (EDA)**, geospatial analyse og statistiske metoder
+        - Bygge og sammenligne maskinlæringsmodeller (Lineær regression, Decision Tree, Random Forest, KNN)  
+          til at forudsige selvmordsrater baseret på alder, køn og BNP per indbygger
+        """
+    )
+
+    # Projektbeskrivelse
+    st.header("1. Projektbeskrivelse")
+    st.markdown(
+        """
+        Datasættet indeholder årlige selvmordsrater (suicides/100k pop) fordelt på:
+        1. **Lande**  
+        2. **Aldersgrupper**  
+        3. **Køn**  
+        4. **Socioøkonomiske faktorer** (BNP per indbygger)
+
+        **Arbejdsflow:**
+        1. Rensning af manglende/irrelevante værdier  
+        2. EDA og visualisering (matplotlib, seaborn, Altair)  
+        3. Statistisk analyse og baseline-modeller  
+        4. Avancerede ML-modeller og interaktivt dashboard med Streamlit  
+        """
+    )
+    st.caption(
+        "Opgaven er udarbejdet af Lars Dige Grønberg, Lukas Ginnerskov Rønberg, "
+        "Mike Patrick Nørlev Andersen og Nicolai Christian Dahl Pejtersen."
+    )
+
+    # Motivation
+    st.header("2. Motivation")
+    st.markdown(
+        """
+        **Samfundsmæssig betydning**  
+        Selvmord er en af de førende dødsårsager i flere aldersgrupper. Effektiv forebyggelse kræver datadrevne indsigter.
+
+        **Manglende interaktivitet**  
+        Eksisterende WHO-rapporter er statiske og vanskelige at udforske for ikke-tekniske brugere.
+
+        **Værdi for interessenter**  
+        Myndigheder, NGO’er og forskere får et intuitivt dashboard, der afdækker geografiske, demografiske og økonomiske mønstre i selvmordsdata.
+        """
+    )
+
+    # Teoretisk fundament
+    st.header("3. Teoretisk Fundament")
+    st.markdown(
+        """
+        - **Descriptive Analytics (EDA):** Beskrivende statistik, fordelinger og outliers.  
+        - **Geospatial Analysis:** Choropleth-kort til at identificere landeklynger og hotspots.  
+        - **Predictive Analytics:** Enkel lineær regression (scikit-learn) som baseline-model.  
+        - **Interactive BI:** Streamlit som frontend, Altair og Plotly Express til dynamiske visualiseringer.
+        """
+    )
+
+if tab == "Konklusion":
+    st.header("Konklusion")
+
+    st.markdown("""
+    Gennem projektet har vi undersøgt selvmordsstatistik på globalt plan ved hjælp af Business Intelligence-værktøjer og maskinlæringsmodeller. Her er de vigtigste take-aways:
+
+    **1. Arbejdsproces og modeller**  
+    - Dataindsamling, rensning og EDA lagde fundamentet for vores analyse.  
+    - Vi testede både supervised (Decision Tree, Random Forest, KNN) og unsupervised (K-means) metoder.
+
+    **2. Håndtering af outliers**  
+    - Fjernelse af ekstreme værdier forbedrede performance og generalisering for især Decision Tree og Random Forest.  
+    - Bevarelse af outliers kan dog være relevant, da sjældne men alvorlige hændelser i sundhedsdata ofte ligger i de ekstreme værdier.
+
+    **3. Datakvalitets-begrænsninger**  
+    - Manglende information om sygdomstilstand, psykologisk vurdering, sociale forhold og adgang til hjælp begrænser modellernes præcision.  
+    - Uden disse nøglevariable kan vi kun pege på overordnede tendenser – ikke sikker forudsigelse af selvmordsrater.
+
+    **4. Læring og anbefalinger**  
+    - Projektet har styrket vores evne til datarensning, modellering og kritisk vurdering.  
+    - For mere pålidelige forudsigelser kræves et rigere datasæt med flere kliniske og sociale variabler.
+
+    **5. Interaktiv præsentation**  
+    - Alle analyser, visualiseringer og modeller er integreret i vores Streamlit-app:  
+      brugeren kan selv udforske geografiske kort, tidsserier og ML-forudsigelser.
+    """)
 
 # ---- Sections ----
 if tab == "Data Cleaning":

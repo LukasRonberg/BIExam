@@ -2,7 +2,7 @@
 
 # Suicide Rate Insights & Dashboard:
 
-## 1. Projetk:
+## 1. Projekt:
 
 Vi har valgt at arbejde med datasættet "Suicide Rates Overview 1985 to 2016"1, som er tilgængeligt
 på Kaggle. Datasættet indeholder information om selvmordsrater fra 1985 til 2016, fordelt på
