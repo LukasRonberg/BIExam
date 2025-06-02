@@ -142,27 +142,17 @@ if tab == "Konklusion":
     st.header("Konklusion")
 
     st.markdown("""
-    Gennem projektet har vi undersøgt selvmordsstatistik på globalt plan ved hjælp af Business Intelligence-værktøjer og maskinlæringsmodeller. Her er de vigtigste take-aways:
+   Gennem vores projekt har vi arbejdet med et følsomt og vigtigt emne – selvmordsstatistik fordelt på lande og aldersgrupper i verden – og forsøgt at analysere og forstå mønstre og potentielle risikofaktorer ved hjælp af Business Intelligence-værktøjer som dataindsamling, datarensning, statistisk analyse og visualisering, kombineret med machine learning-metoder. Vi har anvendt både supervised og unsupervised modeller, herunder Decision Trees, Random Forest, KNN og K-means clustering, til at undersøge datasættet og afprøve muligheden for at lave forudsigelser.
 
-    **1. Arbejdsproces og modeller**  
-    - Dataindsamling, rensning og EDA lagde fundamentet for vores analyse.  
-    - Vi testede både supervised (Decision Tree, Random Forest, KNN) og unsupervised (K-means) metoder.
+Et centralt valg i vores proces var beslutningen om at arbejde med en version af datasættet, hvor outliers var fjernet. Dette blev gjort for at forbedre modellernes performance og sikre, at resultaterne ikke blev domineret af ekstreme værdier. Det viste sig især at være gavnligt for modeller som Decision Tree og Random Forest, hvor fjernelse af outliers hjalp med at forbedre modellens evne til at generalisere og gøre modellerne bedre til at fungere på nye data. Det rensede datasæt skabte dermed en mere stabil og struktureret basis for modellering.
 
-    **2. Håndtering af outliers**  
-    - Fjernelse af ekstreme værdier forbedrede performance og generalisering for især Decision Tree og Random Forest.  
-    - Bevarelse af outliers kan dog være relevant, da sjældne men alvorlige hændelser i sundhedsdata ofte ligger i de ekstreme værdier.
+Dog er det vigtigt at understrege, at man i arbejdet med sundhedsdata – som vores – også kan argumentere for at bevare outliers. Ekstreme tilfælde kan netop indeholde værdifuld information, da de ofte repræsenterer reelle, men sjældne hændelser i befolkningen. Derfor kan det oprindelige datasæt, inklusive outliers, i visse sammenhænge give et mere realistisk billede af virkeligheden og bør ikke nødvendigvis sorteres fra, især hvis formålet er at forstå og reagere på alvorlige enkelttilfælde som selvmord.
 
-    **3. Datakvalitets-begrænsninger**  
-    - Manglende information om sygdomstilstand, psykologisk vurdering, sociale forhold og adgang til hjælp begrænser modellernes præcision.  
-    - Uden disse nøglevariable kan vi kun pege på overordnede tendenser – ikke sikker forudsigelse af selvmordsrater.
+På trods af vores grundige datarensning og modellering må vi dog konstatere, at datasættet i sin nuværende form er for mangelfuldt til at kunne bruges til sikre og troværdige forudsigelser. Flere centrale oplysninger – som f.eks. sygdomstilstand, psykologisk vurdering, sociale forhold og adgang til hjælp – mangler. Disse oplysninger mener vi spiller en central rolle i forståelsen af selvmord, og dette gør det svært at opbygge modeller, der virkelig kan forklare eller forudsige noget brugbart. Resultaterne bør derfor tolkes med stor forsigtighed og ses som overordnede tendenser frem for klare konklusioner.
 
-    **4. Læring og anbefalinger**  
-    - Projektet har styrket vores evne til datarensning, modellering og kritisk vurdering.  
-    - For mere pålidelige forudsigelser kræves et rigere datasæt med flere kliniske og sociale variabler.
+Afslutningsvis har projektet givet os værdifuld erfaring med BI-processer, dataforberedelse, modellering og kritisk vurdering af datakvalitet og modellernes anvendelighed. Det har også tydeliggjort vigtigheden af at forstå den kontekst, man arbejder i – især når man håndterer følsomme sundhedsdata. Vores løsning viser potentiale, men fremhæver også, hvor vigtigt det er at have adgang til mere komplette og centrale data/oplysninger, hvis man vil kunne lave forudsigelser, der kan gøre en reel forskel i praksis.
 
-    **5. Interaktiv præsentation**  
-    - Alle analyser, visualiseringer og modeller er integreret i vores Streamlit-app:  
-      brugeren kan selv udforske geografiske kort, tidsserier og ML-forudsigelser.
+Vores analyser og resultater har vi gjort tilgængelige i en Streamlit-applikation, hvor brugeren kan udforske datavisualiseringer og de modeller, vi har udviklet.
     """)
 
 # ---- Sections ----
